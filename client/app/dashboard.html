@@ -1,0 +1,13 @@
+<template name="dashboard">
+{{#if currentUser}}
+  {{> header}}
+  <div class="container">
+    {{#if isInRole 'admin'}}
+    <p>
+      <a class="btn btn-lg btn-primary" href="{{pathFor 'adminDashboard'}}" role="button">View my admin »</a>
+    </p>
+    {{/if}}
+    {{> yield region='content'}}
+  </div>
+{{/if}}
+</template>

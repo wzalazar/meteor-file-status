@@ -1,0 +1,23 @@
+# Meteor packages used by this project, one per line.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+meteor-platform
+accounts-ui
+joshowens:simple-form
+accounts-entry-master
+iron:router
+mrt:accounts-t9n
+aldeed:simple-schema
+aldeed:collection2
+francocatena:compass
+fourseven:scss
+chrismbeckett:fontawesome4
+yogiben:admin
+reywood:bootstrap3-sass
+alanning:roles
+
+webapp
+percolate:synced-cron
+force-ssl

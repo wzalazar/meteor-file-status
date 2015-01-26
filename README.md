@@ -1,2 +1,2 @@
-# meteor-file-status
-Meteor aplication
+meteor-file-status
+==================

@@ -1,0 +1,20 @@
+@import "compass/reset";
+@import ".meteor/local/build/programs/server/assets/packages/reywood_bootstrap3-sass/bootstrap";
+
+.dropdown-toggle {height: 34px;}
+
+.rest-form {
+border-color: #DDDDDD;
+border-radius: 4px 4px 0 0;
+border-width: 1px;
+box-shadow: none;
+margin-left: 0;
+margin-right: 0;
+border-style: solid;
+padding: 45px 75px 45px 18px;
+position: relative;
+margin: 30px 0px 50px 0px;
+}
+
+.advanced-dispatch-options{margin-right:15px}
+table#rest-list-table {margin: 40px 0px 40px 0px;}

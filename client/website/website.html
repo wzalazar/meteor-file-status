@@ -1,0 +1,35 @@
+<head>
+  <title>Meteor Scaffolding</title>
+</head>
+
+<body>
+</body>
+
+<template name="website">
+
+<div class="container">
+  <div class="jumbotron">
+    <h1>Website</h1>
+    <p>This example is a quick website with bootstrap includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
+    <p>Here you must to create your own website.</p>
+   
+    {{#if currentUser}}
+	    <p>
+	      <a class="btn btn-lg btn-primary" href="{{pathFor 'dashboard'}}" role="button">Dashboard »</a>
+	    </p>
+    {{else}}
+       <p>
+        <a class="btn btn-lg btn-primary" href="{{pathFor 'entrySignIn'}}" role="button">Sign In »</a>
+      </p>
+    {{/if}}
+    {{#if isInRole 'admin'}}
+        <p>
+	      <a class="btn btn-lg btn-primary" href="{{pathFor 'adminDashboard'}}" role="button">Admin »</a>
+	    </p>
+    {{/if}}
+  </div>
+</div>
+
+</template>
+
+
