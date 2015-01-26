@@ -4,6 +4,6 @@
 	<p>{{action}}</p>
 	<p>{{filepath}}</p>
 	<p>{{dateCreated}}</p>
-	<p>{{file}}</p>
+	{{> CodeMirror id="some-id" name="someName" options=editorOptions code=file}}
 {{/each}}
 </template>

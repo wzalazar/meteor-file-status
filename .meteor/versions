@@ -57,6 +57,7 @@ mrt:underscore-string-latest@2.3.3
 npm-bcrypt@0.7.7
 observe-sequence@1.0.4
 ordered-dict@1.0.2
+perak:codemirror@1.1.0
 percolate:synced-cron@1.1.0
 raix:handlebar-helpers@0.1.2
 random@1.0.2

@@ -21,3 +21,4 @@ alanning:roles
 webapp
 percolate:synced-cron
 force-ssl
+perak:codemirror
