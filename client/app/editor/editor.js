@@ -1,3 +1,14 @@
+Template.editor.helpers({
+  "editorOptions": function() {
+          return {
+              lineNumbers: true,
+              mode: "javascript"
+          }
+   }
+})
+
+
+
 Template.editor.events({
   'click .save': function(){
    	    console.log(this.file._id);

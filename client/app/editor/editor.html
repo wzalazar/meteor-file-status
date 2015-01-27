@@ -1,5 +1,6 @@
 <template name="editor">
-<button class="save">Save</button>
+
+<button type="button" class="btn btn-primary save">Save</button>
 <p> <strong>File path = </strong> {{file.filepath}}</p>
 {{# each file.modified}}
 	<p><strong>Username = </strong> {{getUsername userId}}</p>
