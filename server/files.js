@@ -3,6 +3,11 @@ Meteor.publish('files', function() {
 });
 
 
+Meteor.publish('updateFiles', function() {
+    return Files.find({'modified.userId':this.userId});
+});
+
+
 
 Meteor.methods({
    changefile: function(change){
@@ -12,6 +17,7 @@ Meteor.methods({
         	_.each(file.modified,function(modified){
         		if (modified.userId===this.userId){
         			modified.file = change.modified[0].file;
+                    modified.update = change.modified[0].update;
         		}
         	},this);
 
@@ -19,5 +25,9 @@ Meteor.methods({
         }else{
         	Files.insert(change);
         }
+    },
+
+    findFile: function(id){
+        return Files.findOne(id);
     }
 });

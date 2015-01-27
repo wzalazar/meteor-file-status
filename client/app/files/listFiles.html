@@ -1,7 +1,7 @@
 <template name="listFiles">
 	<ul class="nav nav-pills nav-stacked">
 		{{#each files}}
-			<li role="presentation" class="editor {{activeRouteClassById _id}}"><a href="#">{{filepath}}</a></li>
+			<li role="presentation" class="editor {{activeRouteClassById _id}}"><a href="#">{{getArchive filepath}}</a></li>
 		{{/each}}
 	</ul>
 </template>

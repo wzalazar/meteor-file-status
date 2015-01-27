@@ -1,11 +1,12 @@
 <template name="editor">
-
-<p>{{file.filepath}}</p>
+<button class="save">Save</button>
+<p> <strong>File path = </strong> {{file.filepath}}</p>
 {{# each file.modified}}
-	<p>{{action}}</p>
-	<p>{{userId}}</p>
-	<p>{{dateCreated}}</p>
-	{{> CodeMirror id="some-id" name="someName" options=editorOptions code=file}}
+	<p><strong>Username = </strong> {{getUsername userId}}</p>
+	<p><strong>Action = </strong> {{action}}</p>
+	<p><strong>Date modified = </strong> {{dateCreated}}</p>
+
+	{{> CodeMirror id="CodeMirror" name="CodeMirror" options=editorOptions code=fileSession}}
 {{/each}}
 
 </template>

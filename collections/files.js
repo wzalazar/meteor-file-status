@@ -20,7 +20,8 @@ Schema.Files = new SimpleSchema({
 			autoValue: function(){  
 				if (this.isInsert || this.isUpdate) return new Date; 
 			}
-		}
+		},
+		"modified.$.update": { type:Boolean }
 });
 
 Files = new Meteor.Collection("files");
