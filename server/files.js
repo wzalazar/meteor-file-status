@@ -11,17 +11,22 @@ Meteor.publish('updateFiles', function() {
 
 Meteor.methods({
    changefile: function(change){
-        var file= Files.findOne({'filepath':change.filepath,'modified.userId': this.userId});
+        var file= Files.findOne({'filepath':change.filepath});
         if (file){
-
+            var newChange = true;
         	_.each(file.modified,function(modified){
         		if (modified.userId===this.userId){
         			modified.file = change.modified[0].file;
                     modified.update = change.modified[0].update;
+                    newChange = false;
         		}
-        	},this);
-
-        	Files.update({'_id':file._id},{$set:{'modified':file.modified}});
+            },this);
+            if (newChange){
+                change.modified[0].userId = this.userId;
+                Files.update({'_id':file._id},{$push:{'modified':change.modified[0]}});
+            }else{
+        	    Files.update({'_id':file._id},{$set:{'modified':file.modified}});
+            }
         }else{
         	Files.insert(change);
         }
