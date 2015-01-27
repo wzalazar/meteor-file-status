@@ -2,10 +2,12 @@ function refreshCodeMirror(file){
 	if (file){
 		var arrayFile = file.fetch();
 		$('.CodeMirror').remove();
-		var textarea = document.getElementById("CodeMirror");
-		var editor = CodeMirror.fromTextArea(textarea);
-		editor.getDoc().setValue(arrayFile[0].modified[0].file);
-		Meteor.editor= editor;
+		if (document.getElementById("CodeMirror")){
+			var textarea = document.getElementById("CodeMirror");
+			var editor = CodeMirror.fromTextArea(textarea);
+			editor.getDoc().setValue(arrayFile[0].modified[0].file);
+			Meteor.editor= editor;
+		}
 	}
 }
 

@@ -1,9 +1,3 @@
-Template.editor.helpers({
-  fileSession: function(){
-    return Session.get('file');
-  }
-})
-
 Template.editor.events({
   'click .save': function(){
    	    console.log(this.file._id);
@@ -11,7 +5,6 @@ Template.editor.events({
         if (file){
         	_.each(file.modified,function(modified){
         		if (modified.userId===Meteor.userId()){
-        			console.log(Meteor.editor.getValue());
         			modified.file = Meteor.editor.getValue();
         			modified.update = true;
         		}
@@ -20,10 +13,7 @@ Template.editor.events({
         	Meteor.call("changefile",file, function(err,result){
         		if (err) console.log(err);
         	})
-
-        	//Files.update({'_id':file._id},{$set:{'modified':file.modified}});
         }
-		//console.log(Meteor.editor.getValue());
   }
 })
 
