@@ -1,9 +1,7 @@
 <template name="listFiles">
-{{#each files}}
-	<p>{{userId}}</p>
-	<p>{{action}}</p>
-	<p>{{filepath}}</p>
-	<p>{{dateCreated}}</p>
-	{{> CodeMirror id="some-id" name="someName" options=editorOptions code=file}}
-{{/each}}
+	<ul class="nav nav-pills nav-stacked">
+		{{#each files}}
+			<li role="presentation" class="editor {{activeRouteClassById _id}}"><a href="#">{{filepath}}</a></li>
+		{{/each}}
+	</ul>
 </template>

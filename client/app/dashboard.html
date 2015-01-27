@@ -7,7 +7,12 @@
       <a class="btn btn-lg btn-primary" href="{{pathFor 'adminDashboard'}}" role="button">View my admin »</a>
     </p>
     {{/if}}
-    {{> yield region='content'}}
+    <div style="width:25%; float:left; margin-right:5%;">
+    	{{> yield region='listFiles'}}
+    </div>
+    <div style="width:70%; float:left">
+    	{{> yield region='editor'}}
+    </div>
   </div>
 {{/if}}
 </template>

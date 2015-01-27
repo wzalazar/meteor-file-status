@@ -2,19 +2,23 @@ Schema = {};
 
 Schema.Files = new SimpleSchema({
 	
-		userId:{
+		filepath: { type:String, unique: true},
+		modified: {
+	        type: [Object],
+	        minCount: 1
+	    },
+		"modified.$.userId":{
 			type: String,
 			autoValue: function(){  
 				if (this.isInsert) return Meteor.userId(); 
 			}
 		},
-		filepath: { type:String},
-		action: { type:String},
-		file: { type:String},
-		dateCreated:{
+		"modified.$.action": { type:String},
+		"modified.$.file": { type:String},
+		"modified.$.dateCreated":{
 			type: Date,
 			autoValue: function(){  
-				if (this.isInsert) return new Date; 
+				if (this.isInsert || this.isUpdate) return new Date; 
 			}
 		}
 });

@@ -8,3 +8,11 @@ Template.listFiles.helpers({
     }
 })
 
+Template.listFiles.events({
+	'click .editor': function(event){
+		event.preventDefault();
+		console.log(this._id);
+	    Router.go('editor',{_id:this._id});
+	}
+})
+

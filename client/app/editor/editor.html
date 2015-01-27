@@ -1,0 +1,11 @@
+<template name="editor">
+
+<p>{{file.filepath}}</p>
+{{# each file.modified}}
+	<p>{{action}}</p>
+	<p>{{userId}}</p>
+	<p>{{dateCreated}}</p>
+	{{> CodeMirror id="some-id" name="someName" options=editorOptions code=file}}
+{{/each}}
+
+</template>
