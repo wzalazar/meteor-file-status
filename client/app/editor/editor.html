@@ -1,13 +1,31 @@
 <template name="editor">
-
-<button type="button" class="btn btn-primary save">Save</button>
-<p> <strong>File path = </strong> {{file.filepath}}</p>
-{{# each file.modified}}
-	<p><strong>Username = </strong> {{getUsername userId}}</p>
-	<p><strong>Action = </strong> {{action}}</p>
-	<p><strong>Date modified = </strong> {{dateCreated}}</p>
-
-	{{> CodeMirror id="CodeMirror" name="CodeMirror" options=editorOptions code=file}}
+<div style="width:calc(100% - 170px); float: left">
+{{#each file.modified}}
+	{{#if notMe userId}}
+	<div class="media block-update-card user-card">
+	<span class="glyphicon glyphicon glyphicon-ok ok-selected" aria-hidden="true"></span>
+	  <a class="pull-left" href="#">
+	    <img class="media-object update-card-MDimentions" src="{{getImageUser userId}}" alt="...">
+	  </a>
+	  <div class="media-body update-card-body">
+	    <h4 class="media-heading">{{getUsername userId}}</h4>
+	    <p><strong>Action = </strong> {{action}}</p>
+	    <p><strong>Date modified = </strong> {{dateCreated}}</p>
+	  </div>
+	</div>
+	{{/if}}
 {{/each}}
-
+</div>
+{{#if areThereFilesMerge}}
+	<div style="width:150px; float:right">
+	{{#if activateViewMerge}}
+		<button type="button" class="btn btn-primary quit-merge" style="float: right;">Quit merge</button>
+	{{else}}
+		<button type="button" class="btn btn-primary view-merge" style="float: right;">View merge</button>
+	{{/if}}
+	</div>
+{{/if}}
+<div class="banner-file-path"><p>{{file.filepath}}</p></div>
+<div id="view"></div>
+<button type="button" class="btn btn-primary save">Send to file local</button>
 </template>

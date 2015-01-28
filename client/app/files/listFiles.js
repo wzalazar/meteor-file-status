@@ -1,3 +1,5 @@
+Session.set('fileId');
+
 function refreshCodeMirror(file){
 	if (file){
 		var arrayFile = file.fetch();
@@ -10,6 +12,7 @@ function refreshCodeMirror(file){
 		}
 	}
 }
+
 
 Template.listFiles.helpers({
 	"editorOptions": function() {
@@ -24,8 +27,9 @@ Template.listFiles.helpers({
 Template.listFiles.events({
 	'click .editor': function(event){
 		event.preventDefault();
-		
 		var file= Files.find({'_id':this._id});
+		Session.set('fileId',this._id);
+		Session.set("areThereFilesMerge",false);
 
 		var handle = file.observeChanges({
 		  changed: function (id, user) {
@@ -34,6 +38,22 @@ Template.listFiles.events({
 		});
 
 		refreshCodeMirror(file);
+		var id= Session.get('fileId');
+		var file= Files.findOne({'_id':id});
+		_.each(file.modified,function(modified){
+	      if (modified.userId===Meteor.userId()){
+	            myFile = modified.file;
+	      }
+	    },this);
+		var codeMirrorMerge = {
+                        id: "view",
+                        value: myFile,
+                        panes: 1,
+                        highlight : true, 
+                        connect : null, 
+                        collapse : false
+                      };
+  		Meteor.codeMirror.merge(codeMirrorMerge);
 	    Router.go('editor',{_id:this._id});
 	}
 })
