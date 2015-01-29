@@ -19,23 +19,30 @@ function removeInArray(arrayUserCard,userId){
   }
 }
 
-Template.editor.rendered = function(){
-var id= Session.get('fileId');
-    var file= Files.findOne({'_id':id});
-    _.each(file.modified,function(modified){
+function modifyFile(id){
+  var myFile;
+  var file= Files.findOne({'_id':id});
+  _.each(file.modified,function(modified){
         if (modified.userId===Meteor.userId()){
               myFile = modified.file;
         }
-      },this);
-    var codeMirrorMerge = {
-                        id: "view",
-                        value: myFile,
-                        panes: 1,
-                        highlight : true, 
-                        connect : null, 
-                        collapse : true
-                      };
-      Meteor.codeMirror.merge(codeMirrorMerge);
+  },this);
+  return myFile;
+}
+
+Template.editor.rendered = function(){
+    var myFile= modifyFile(this.data.file._id);
+    if (myFile){
+        var codeMirrorMerge = {
+                            id: "view",
+                            value: myFile,
+                            panes: 1,
+                            highlight : true, 
+                            connect : null, 
+                            collapse : true
+                          };
+        Meteor.codeMirror.merge(codeMirrorMerge);
+    }
 }
 
 Template.editor.helpers({
@@ -57,20 +64,18 @@ Template.editor.helpers({
 
 Template.editor.events({
   'click .save': function(){
-   	    console.log(this.file._id);
-   	    var file= Files.findOne({'_id':this.file._id,'modified.userId': Meteor.userId()});
-        if (file){
-        	_.each(file.modified,function(modified){
-        		if (modified.userId===Meteor.userId()){
-        			modified.file = Meteor.editor.getValue();
-        			modified.update = true;
-        		}
-        	},this);
-
-        	Meteor.call("changefile",file, function(err,result){
+    debugger
+          change = {
+                  filepath: this.file.filepath,
+                  modified: {
+                      'userId': Meteor.userId(),
+                      'action': 'changed',
+                      'file': Meteor.codeMirror.getValue()
+                  }
+          };
+        	Meteor.call("changefile",change, function(err,result){
         		if (err) console.log(err);
         	})
-        }
   },
 
   'click .user-card': function(event){
@@ -98,14 +103,8 @@ Template.editor.events({
   },
 
   'click .view-merge': function(){
-    debugger
-      var id= Session.get('fileId');
-      var file= Files.findOne({'_id':id});
-      _.each(file.modified,function(modified){
-        if (modified.userId===Meteor.userId()){
-              myFile = modified.file;
-        }
-      },this);
+      var myFile= modifyFile(this.file._id);
+
       var arrayOtherFiles = [];
       _.each(arrayUserCard,function(modified){
           arrayOtherFiles.push(modified.file);
@@ -147,13 +146,7 @@ Template.editor.events({
     arrayUserCard = [];
     Session.set('viewMerge',false);
     Session.set("areThereFilesMerge",false);
-    var id= Session.get('fileId');
-    var file= Files.findOne({'_id':id});
-    _.each(file.modified,function(modified){
-        if (modified.userId===Meteor.userId()){
-              myFile = modified.file;
-        }
-      },this);
+    var myFile= modifyFile(this.file._id);
     var codeMirrorMerge = {
                         id: "view",
                         value: myFile,
@@ -163,7 +156,6 @@ Template.editor.events({
                         collapse : true
                       };
     Meteor.codeMirror.merge(codeMirrorMerge);
-     
   }
 })
 
