@@ -1,6 +1,25 @@
 Session.set('viewMerge',false);
 var arrayUserCard = [];
 
+function effectButton(){
+  [].slice.call( document.querySelectorAll( 'button.progress-button' ) ).forEach( function( bttn ) {
+        new ProgressButton( bttn, {
+          callback : function( instance ) {
+            var progress = 0,
+              interval = setInterval( function() {
+                progress = Math.min( progress + Math.random() * 0.1, 1 );
+                instance._setProgress( progress );
+
+                if( progress === 1 ) {
+                  instance._stop(1);
+                  clearInterval( interval );
+                }
+              }, 50 );
+          }
+        } );
+  } );
+}
+
 function existInArray(arrayUserCard,userId){
   var exists = false;
   _.each(arrayUserCard,function(userCard){
@@ -43,6 +62,7 @@ Template.editor.rendered = function(){
                           };
         Meteor.codeMirror.merge(codeMirrorMerge);
     }
+    effectButton();
 }
 
 Template.editor.helpers({
@@ -64,13 +84,13 @@ Template.editor.helpers({
 
 Template.editor.events({
   'click .save': function(){
-    debugger
           change = {
                   filepath: this.file.filepath,
                   modified: {
                       'userId': Meteor.userId(),
                       'action': 'changed',
-                      'file': Meteor.codeMirror.getValue()
+                      'file': Meteor.codeMirror.getValue(),
+                      'dateCreated': Date.now()
                   }
           };
         	Meteor.call("changefile",change, function(err,result){

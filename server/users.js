@@ -42,5 +42,9 @@ Meteor.users.allow({
 Meteor.methods({
    updateStatusConnect: function(status){
         Meteor.users.update(this.userId,{ $set : { 'connect' : status } });
+    },
+
+    getUser: function(id){
+        return Meteor.users.findOne(id);
     }
 });

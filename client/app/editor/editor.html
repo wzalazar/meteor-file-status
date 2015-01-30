@@ -19,13 +19,13 @@
 {{#if areThereFilesMerge}}
 	<div style="width:150px; float:right">
 	{{#if activateViewMerge}}
-		<button type="button" class="btn btn-primary quit-merge" style="float: right;">Quit merge</button>
+		<button type="button" class="btn btn-danger quit-merge" style="float: right;">Quit merge <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
 	{{else}}
-		<button type="button" class="btn btn-primary view-merge" style="float: right;">View merge</button>
+		<button type="button" class="btn btn-primary view-merge" style="float: right;">View merge <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
 	{{/if}}
 	</div>
 {{/if}}
 <div class="banner-file-path"><p>{{file.filepath}}</p></div>
 <div id="view"></div>
-<button type="button" class="btn btn-primary save">Send to file local</button>
+<button class="btn btn btn-success save">Send to file local <span class="glyphicon glyphicon-download" aria-hidden="true"></span></button>
 </template>

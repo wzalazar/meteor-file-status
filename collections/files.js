@@ -18,7 +18,7 @@ Schema.Files = new SimpleSchema({
 		"modified.$.dateCreated":{
 			type: Date,
 			autoValue: function(){  
-				if (this.isInsert || this.isUpdate) return new Date; 
+				if (this.isInsert) return new Date; 
 			}
 		}
 });

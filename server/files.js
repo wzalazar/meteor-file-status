@@ -24,17 +24,27 @@ Meteor.methods({
             if (existsUserInArray(file,this.userId)){
                 _.each(file.modified,function(modified){
                     if (modified.userId===this.modified.userId){
-                        
                         modified.file = this.modified.file;
+                        modified.dateCreated = Date.now();
                     }
                 },change);
                 Files.update({'filepath':file.filepath},{$set:{'modified':file.modified}});
             }
             else{
+                change.modified.dateCreated = Date.now();
                 Files.update({'filepath':file.filepath},{$push:{'modified':change.modified}});
             }
         }else{
-        	Files.update({'filepath':change.filepath},{$push:{'modified':change.modified}});
+            var file= {
+                'filepath': change.filepath,
+                'modified':[{
+                    'userId': this.userId,
+                    'action': change.modified.action,
+                    'file': change.modified.file,
+                    'dateCreated': Date.now()
+                }]
+            }
+        	Files.insert(file);
         }
     },
 
