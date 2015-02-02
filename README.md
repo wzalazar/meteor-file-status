@@ -21,20 +21,20 @@ Install Meteor:
 ```shell
 curl https://install.meteor.com | /bin/sh
 ```
-This system requires grunt-file-status https://github.com/wzalazar/grunt-file-status
 
-If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
+After that, clone the system
 
 ```shell
 git clone git@github.com:wzalazar/meteor-file-status.git
 ```
 
-Once the system has been installed, you have to install grunt-file-status
+This system requires grunt-file-status https://github.com/wzalazar/grunt-file-status
+
+If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
 ```shell
 npm install grunt-file-status --save-dev
 ```
-
 Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
 
 ```js
